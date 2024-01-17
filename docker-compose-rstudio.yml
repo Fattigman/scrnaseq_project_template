@@ -1,0 +1,11 @@
+services:
+  rstudio:
+    image: fattiglappen/seurat_rstudio:1.0.0
+    platform: linux/arm64
+    ports:
+      - "8787:8787"
+    environment:
+      PASSWORD: supersecretpassword
+    volumes:
+      - ./.rstudio_config:/home/rstudio/.config/rstudio
+      - ./:/home/rstudio/workspace
