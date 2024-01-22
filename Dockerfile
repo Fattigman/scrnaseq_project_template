@@ -67,8 +67,12 @@ RUN R --no-echo --no-restore --no-save -e "install.packages('Seurat')"
 # Install SeuratDisk
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('mojaveazure/seurat-disk')"
 
+# Install DoubletFinder
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
-
+# Install HoneyBADGER
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/HoneyBADGER')"
+# Install Harmony
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/harmony', force = TRUE)"
 # Expose port 8787 for RStudio
 EXPOSE 8787
 
