@@ -69,7 +69,11 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('mojaveazure/
 
 # Install DoubletFinder
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
-# Install HoneyBADGER
+# Install HoneyBADGER including dependencies
+RUN apt-get update && sudo apt-get install jags
+
+RUN R --no-echo --no-restore --no-save -e "install.packages('rjags')"
+
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/HoneyBADGER')"
 # Install Harmony
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/harmony', force = TRUE)"
