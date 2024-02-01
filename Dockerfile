@@ -77,6 +77,8 @@ RUN R --no-echo --no-restore --no-save -e "install.packages('rjags')"
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/HoneyBADGER')"
 # Install Harmony
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/harmony', force = TRUE)"
+# Install faster Will coxon
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
 # Expose port 8787 for RStudio
 EXPOSE 8787
 
