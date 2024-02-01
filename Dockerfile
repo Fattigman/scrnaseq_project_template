@@ -79,6 +79,10 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/Hon
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/harmony', force = TRUE)"
 # Install faster Will coxon
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
+# Install scDblFinder, and decontX
+RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX'))"
+
+
 # Expose port 8787 for RStudio
 EXPOSE 8787
 
