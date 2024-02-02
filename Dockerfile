@@ -23,6 +23,21 @@ RUN apt-get install -y \
     libgsl-dev \
     pkg-config
 
+# Install scDblFinder, and decontx dependencies 
+RUN apt-get install -y \
+    libpcre2-dev \
+    libbz2-dev \
+    zlib1g-dev \
+    libglpk-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libcairo2-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
+
+
 # Add LLVM repository and install the latest version of LLVM
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 RUN echo 'deb http://apt.llvm.org/buster/ llvm-toolchain-buster main' | tee -a /etc/apt/sources.list
@@ -81,7 +96,6 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomi
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
 # Install scDblFinder, and decontX
 RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX'))"
-
 
 # Expose port 8787 for RStudio
 EXPOSE 8787
