@@ -17,3 +17,4 @@ data/*/*
 # -------------------------
 !.gitignore
 !data/*/README.md
+!.devcontainer
