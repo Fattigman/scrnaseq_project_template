@@ -1,7 +1,11 @@
+name: scrnaseq
 channels:
 - conda-forge
 - bioconda
 dependencies:
-- python
-- r-base
-- r-essentials
+- python=3.11
+- scanpy
+- pandas
+- seaborn
+pip:
+- harmony
