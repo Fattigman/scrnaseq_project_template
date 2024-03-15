@@ -87,10 +87,10 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('mojaveazure/
 
 # Install DoubletFinder
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
-# Install HoneyBADGER including dependencies
+# Install HoneyBADGER and InferCNV including dependencies
 RUN apt-get update && sudo apt-get install jags
 
-RUN R --no-echo --no-restore --no-save -e "install.packages('rjags')"
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('rjags', 'infercnv'))"
 
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/HoneyBADGER')"
 # Install Harmony
@@ -99,7 +99,7 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomi
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
 # Install scDblFinder, and decontX
 RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX'))"
-
+# Install scDblFinder, and decontX
 # Expose port 8787 for RStudio
 EXPOSE 8787
 
