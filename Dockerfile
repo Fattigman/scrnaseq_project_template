@@ -61,11 +61,11 @@ RUN R --no-echo --no-restore --no-save -e "install.packages('BiocManager')"
 RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('multtest', 'S4Vectors', 'SummarizedExperiment', 'SingleCellExperiment', 'MAST', 'DESeq2', 'BiocGenerics', 'GenomicRanges', 'IRanges', 'rtracklayer', 'monocle', 'Biobase', 'limma', 'glmGamPoi'))"
 
 # Install CRAN suggests
-RUN R --no-echo --no-restore --no-save -e "install.packages(c('VGAM', 'R.utils', 'metap', 'Rfast2', 'ape', 'enrichR', 'mixtools'))"
-
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('VGAM', 'R.utils', 'metap', 'Rfast2', 'ape', 'enrichR', 'mixtools', 'scCustomize', 'SCpubr'))"
+# Install further dependencies for scPubR
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('assertthat','circlize','colorspace','dplyr','ggbeeswarm','ggdist','ggExtra','ggnewscale','ggplot2','ggplotify','ggrastr','ggrepel','ggridges','ggsignif','graphics','magrittr','patchwork','pheatmap','plyr','rlang','scales','scattermore','Seurat','tibble','tidyr','forcats','Matrix','purrr','stringr','svglite','viridis'))"  
 # Install rlba from source because of Matrix bug
 RUN R --no-echo --no-restore --no-save -e "install.packages('rlba', type = 'source')"
-
 # Install spatstat
 RUN R --no-echo --no-restore --no-save -e "install.packages(c('spatstat.explore', 'spatstat.geom'))"
 
@@ -88,7 +88,7 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('mojaveazure/
 # Install DoubletFinder
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
 # Install HoneyBADGER and InferCNV including dependencies
-RUN apt-get update && sudo apt-get install jags
+RUN apt-get update && apt-get install jags
 
 RUN R --no-echo --no-restore --no-save -e "install.packages(c('rjags', 'infercnv'))"
 
@@ -98,7 +98,7 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomi
 # Install faster Will coxon
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
 # Install scDblFinder, and decontX
-RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX'))"
+RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX', 'slingshot','AUCell','ComplexHeatmap','clusterProfiler','enrichplot','Nebulosa','UCell'))"
 # Install scDblFinder, and decontX
 # Expose port 8787 for RStudio
 EXPOSE 8787

@@ -1,0 +1,40 @@
+# Start from the rocker/tidyverse image for stable R and tidyverse installations
+FROM satijalab/seurat:5.0.0
+
+RUN apt-get update && apt-get upgrade -y && apt-get -f install -y 
+# Install scDblFinder, and decontx dependencies 
+RUN apt-get install -y \
+    libpcre2-dev \
+    libbz2-dev \
+    zlib1g-dev \
+    libglpk-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libcairo2-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
+
+# Install system library for rgeos
+RUN apt-get install -y libgeos-dev
+# Install DoubletFinder
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
+# Install HoneyBADGER and InferCNV including dependencies
+RUN apt-get update && apt-get install jags
+
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('rjags', 'infercnv'))"
+
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('JEFworks/HoneyBADGER')"
+# Install Harmony
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/harmony', force = TRUE)"
+# Install faster Will coxon
+RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
+# Install scDblFinder, and decontX
+RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX'))"
+# Install qs
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('qs'))"
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('stringr'))"
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('dplyr'))"
+# Run Rscript
+CMD ["Rscript"]
