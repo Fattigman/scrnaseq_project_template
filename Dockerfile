@@ -23,7 +23,7 @@ RUN apt-get install -y \
     libgsl-dev \
     pkg-config
 
-# Install scDblFinder, and decontx dependencies 
+# Install scDblFinder, monocle3, and decontx dependencies 
 RUN apt-get install -y \
     libpcre2-dev \
     libbz2-dev \
@@ -35,7 +35,9 @@ RUN apt-get install -y \
     libfreetype6-dev \
     libpng-dev \
     libtiff5-dev \
-    libjpeg-dev
+    libjpeg-dev \
+    libgdal-dev \
+    libudunits2-dev
 
 
 # Add LLVM repository and install the latest version of LLVM
@@ -100,6 +102,7 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomi
 # Install scDblFinder, and decontX
 RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX', 'slingshot','AUCell','ComplexHeatmap','clusterProfiler','enrichplot','Nebulosa','UCell'))"
 # Install scDblFinder, and decontX
+RUN pip install leidenalg pandas
 # Expose port 8787 for RStudio
 EXPOSE 8787
 
