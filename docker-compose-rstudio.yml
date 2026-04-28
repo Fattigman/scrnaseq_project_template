@@ -1,6 +1,6 @@
 services:
   rstudio:
-    image: fattiglappen/seurat_rstudio:1.0.0
+    image: fattiglappen/seurat_rstudio:1.6.0
     platform: linux/arm64
     ports:
       - "8787:8787"

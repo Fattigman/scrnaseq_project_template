@@ -32,3 +32,11 @@ project
 |- environment.yml     software dependencies list, used to create a project environment
 |- Dockerfile          recipe to create a project container
 ```
+
+# How to update docker images
+```shell
+# Edit Dockerfile
+docker build . -t "fattiglappen/seurat_rstudio:<version>".
+docker push fattiglappen/seurat_rstudio:<version>
+# Update docker-compose-rstudio.yml with updated docker image version
+```
