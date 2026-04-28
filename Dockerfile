@@ -1,5 +1,5 @@
 # Start from the rocker/rstudio image for stable R and RStudio installations
-FROM rocker/rstudio:4.3.1
+FROM rocker/rstudio:4.6.0
 
 # Set global R options
 RUN echo "options(repos = 'https://cloud.r-project.org')" > $(R --no-echo --no-save -e "cat(Sys.getenv('R_HOME'))")/etc/Rprofile.site
@@ -69,7 +69,7 @@ RUN R --no-echo --no-restore --no-save -e "install.packages(c('assertthat','circ
 # Install rlba from source because of Matrix bug
 RUN R --no-echo --no-restore --no-save -e "install.packages('rlba', type = 'source')"
 # Install spatstat
-RUN R --no-echo --no-restore --no-save -e "install.packages(c('spatstat.explore', 'spatstat.geom'))"
+RUN R --no-echo --no-restore --no-save -e "install.packages(c('spatstat.explore', 'spatstat.geom', 'spatstat'))"
 
 # Install hdf5r
 RUN R --no-echo --no-restore --no-save -e "install.packages('hdf5r')"
@@ -79,10 +79,6 @@ RUN R --no-echo --no-restore --no-save -e "install.packages('Matrix')"
 
 # Install rgeos
 RUN R --no-echo --no-restore --no-save -e "install.packages('rgeos')"
-
-# Install Seurat
-RUN R --no-echo --no-restore --no-save -e "install.packages('remotes')"
-RUN R --no-echo --no-restore --no-save -e "install.packages('Seurat')"
 
 # Install SeuratDisk
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('mojaveazure/seurat-disk')"
@@ -101,7 +97,7 @@ RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomi
 RUN R --no-echo --no-restore --no-save -e "remotes::install_github('immunogenomics/presto', force = TRUE)"
 # Install scDblFinder, and decontX
 RUN R --no-echo --no-restore --no-save -e "BiocManager::install(c('scDblFinder', 'decontX', 'slingshot','AUCell','ComplexHeatmap','clusterProfiler','enrichplot','Nebulosa','UCell'))"
-# Install scDblFinder, and decontX
+
 RUN pip install leidenalg pandas
 # Expose port 8787 for RStudio
 EXPOSE 8787
