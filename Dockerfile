@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfftw3-dev \
     libgsl-dev \
     # scDblFinder / monocle3 / decontX
+    libuv1-dev \
     libpcre2-dev \
     libbz2-dev \
     zlib1g-dev \
@@ -67,7 +68,7 @@ RUN R --no-echo --no-restore --no-save -e "\
         'multtest', 'S4Vectors', 'SummarizedExperiment', 'SingleCellExperiment', \
         'MAST', 'DESeq2', 'BiocGenerics', 'GenomicRanges', 'IRanges', \
         'rtracklayer', 'monocle', 'Biobase', 'limma', 'glmGamPoi', \
-        'scDblFinder', 'decontX', 'slingshot', 'AUCell', \
+        'scDblFinder', 'decontX', 'slingshot', 'AUCell', 'biomaRt', \
         'ComplexHeatmap', 'clusterProfiler', 'enrichplot', 'Nebulosa', 'UCell' \
     )); \
     "
